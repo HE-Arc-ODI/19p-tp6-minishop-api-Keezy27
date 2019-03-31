@@ -9,10 +9,7 @@ import ch.hearc.ig.odi.minishop.exception.CustomerException;
 import ch.hearc.ig.odi.minishop.services.PersistenceService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 
@@ -38,6 +35,15 @@ public class CustomerResource {
             throw new CustomerException("Customer with id " + id + " not found");
         }
 
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void createCustomer(String username, String firstname, String lastname,
+                               String email,
+                               String phone) {
+        persistenceService.createAndPersistCustomer(username, firstname, lastname, email, phone);
     }
 }
 
