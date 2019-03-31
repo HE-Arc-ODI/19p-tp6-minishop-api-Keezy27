@@ -46,5 +46,12 @@ public class CustomerResource {
         persistenceService.deleteCustomer(id);
     }
 
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void updateCustomer(@PathParam("id") Long id, Customer customer) throws CustomerException {
+        persistenceService.updateCustomer(id, customer);
+    }
 }
 
