@@ -28,13 +28,7 @@ public class CustomerResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getCustomerByID(@PathParam("id") Long id) throws CustomerException {
-        try{
-            return persistenceService.getCustomerByID(id);
-        }catch (CustomerException ex){
-            ex.printStackTrace();
-            throw new CustomerException("Customer with id " + id + " not found");
-        }
-
+        return persistenceService.getCustomerByID(id);
     }
 
     @POST
@@ -45,5 +39,12 @@ public class CustomerResource {
                                String phone) {
         persistenceService.createAndPersistCustomer(username, firstname, lastname, email, phone);
     }
+
+    @DELETE
+    @Path("{id}")
+    public void deleteCustomer(@PathParam("id") Long id) throws CustomerException {
+        persistenceService.deleteCustomer(id);
+    }
+
 }
 
